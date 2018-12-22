@@ -141,7 +141,7 @@ void async_example()
 // {:p} - don't print the position on each line start.
 // {:n} - don't split the output to lines.
 
-#include "spdlog/fmt/bin_to_hex.h"
+#include "spdlog/bin_to_hex.h"
 void binary_example()
 {
     std::vector<char> buf;
@@ -188,7 +188,9 @@ void multi_sink_example()
 }
 
 // User defined types logging by implementing operator<<
-#include "spdlog/fmt/ostr.h" // must be included
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/ostream.h>
 struct my_type
 {
     int i;

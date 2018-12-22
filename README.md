@@ -188,7 +188,7 @@ spdlog::flush_every(std::chrono::seconds(3));
 // {:p} - don't print the position on each line start.
 // {:n} - don't split the output to lines.
 
-#include "spdlog/fmt/bin_to_hex.h"
+#include "spdlog/bin_to_hex.h"
 
 void binary_example()
 {
@@ -263,7 +263,9 @@ void multi_sink_example2()
 #### User defined types
 ```c++
 // user defined types logging by implementing operator<<
-#include "spdlog/fmt/ostr.h" // must be included
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/ostream.h>
 struct my_type
 {
     int i;

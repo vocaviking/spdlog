@@ -135,7 +135,7 @@ TEST_CASE("clone async", "[clone]")
     spdlog::drop_all();
 }
 
-#include "spdlog/fmt/bin_to_hex.h"
+#include "spdlog/bin_to_hex.h"
 
 TEST_CASE("to_hex", "[to_hex]")
 {

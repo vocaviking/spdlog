@@ -55,10 +55,6 @@ option(SPDLOG_BUILD_BENCH "Build benchmarks" ${SPDLOG_MASTER_PROJECT})
 option(SPDLOG_BUILD_TESTS "Build tests" ${SPDLOG_MASTER_PROJECT})
 option(SPDLOG_FMT_EXTERNAL "Use external fmt library instead of bundled" OFF)
 
-if(SPDLOG_FMT_EXTERNAL)
-    find_package(fmt REQUIRED CONFIG)
-endif()
-
 target_include_directories(
     spdlog
     INTERFACE
@@ -68,7 +64,10 @@ target_include_directories(
 
 if(SPDLOG_FMT_EXTERNAL)
     target_compile_definitions(spdlog INTERFACE SPDLOG_FMT_EXTERNAL)
-    target_link_libraries(spdlog INTERFACE fmt::fmt)
+    target_link_libraries(spdlog INTERFACE fmt)
+else()
+    target_compile_definitions(spdlog INTERFACE FMT_HEADER_ONLY)
+    target_include_directories(spdlog INTERFACE lib/fmt/include)
 endif()
 
 set(HEADER_BASE "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -135,20 +134,20 @@ install(
     DESTINATION "${pkgconfig_install_dir}"
 )
 
-# install targets config file
-install(
-    EXPORT "${targets_export_name}"
-    NAMESPACE "${namespace}"
-    DESTINATION "${config_install_dir}"
-    FILE ${targets_config}
-)
+# # install targets config file
+# install(
+#     EXPORT "${targets_export_name}"
+#     NAMESPACE "${namespace}"
+#     DESTINATION "${config_install_dir}"
+#     FILE ${targets_config}
+# )
 
-# export build directory targets file
-export(
-    EXPORT ${targets_export_name}
-    NAMESPACE "${namespace}"
-    FILE ${targets_config}
-)
+# # export build directory targets file
+# export(
+#     EXPORT ${targets_export_name}
+#     NAMESPACE "${namespace}"
+#     FILE ${targets_config}
+# )
 
 # register project in CMake user registry
 export(PACKAGE ${PROJECT_NAME})

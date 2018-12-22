@@ -11,7 +11,8 @@
 
 #include "spdlog/details/file_helper.h"
 #include "spdlog/details/null_mutex.h"
-#include "spdlog/fmt/fmt.h"
+#include <fmt/core.h>
+#include <fmt/format.h>
 #include "spdlog/sinks/base_sink.h"
 
 #include <cerrno>
